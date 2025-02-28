@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const engine = require("ejs-mate");
 const path = require("path");
 const frontendAuthRoute = require("./routes/frontend/auth.routes");
+const frontendSellerRoute = require("./routes/frontend/seller.routes");
 
 
 //Configuration of the dotenv.
@@ -13,7 +14,8 @@ dotenv.config();
 const app = express();
 
 //Serving the Css and Images Files.
-app.use(express.static(path.join(__dirname,"/public/css")));
+app.use(express.static(path.join(__dirname,"/public")));
+// app.use(express.static(path.join(__dirname, "/public/images")));
 
 //Making the view Engine.
 app.engine("ejs", engine);
@@ -40,6 +42,14 @@ const PORT = process.env.PORT || 5000;
 app.use("/auth", frontendAuthRoute);
 
 //***********************AUTH BACKEND ROUTES************************** */
+
+
+
+//This Route will show the seller dashboards.
+//***********************SELLER FRONTEND DASHBOARD ROUTES************************* */
+app.use("/seller", frontendSellerRoute);
+
+
 
 
 //Port is listening at PORT.

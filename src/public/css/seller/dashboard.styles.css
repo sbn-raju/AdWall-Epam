@@ -1,0 +1,130 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    background: #f4f4f4;
+}
+
+
+/* Collapsible Sidebar for Mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+        padding: 15px;
+        align-items: center;
+    }
+
+    .logo h2 {
+        font-size: 20px;
+    }
+
+    .nav-links a {
+        justify-content: center;
+        padding: 12px;
+    }
+
+    .nav-links a i {
+        margin-right: 0;
+    }
+
+    .nav-links a span {
+        display: none;
+    }
+}
+
+
+/* Main Content */
+.content {
+    margin:auto;
+    padding: 30px;
+    height: 60vh;
+    /* width: calc(100% - 250px); */
+}
+
+header h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6600;
+}
+
+/* Quick Actions */
+.quick-actions {
+    margin-top: 30px;
+}
+
+.quick-actions h3 {
+    margin-bottom: 15px;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #ff4500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+
+    .cards {
+        flex-direction: column;
+    }
+}

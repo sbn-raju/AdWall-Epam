@@ -5,6 +5,13 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+
+body {
+    display: flex;
+    flex-direction: column; /* Keeps header and footer on top & bottom */
+    min-height: 100vh;
+}
+
 /* Footer Styles */
 .footer {
     background-color: #222;
