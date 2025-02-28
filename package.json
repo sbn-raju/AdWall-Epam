@@ -1,0 +1,29 @@
+{
+  "name": "epam-project",
+  "version": "1.0.0",
+  "description": "Welcome to **AdWall**, a web application designed to connect **property owners** and **advertisers** seamlessly. If you have a **compound wall, building facade, or any outdoor space**, you can **rent it out** as an advertising space and earn passive income. On the other hand, businesses and advertisers looking for **high-visibility locations** can easily browse and book spaces for their marketing campaigns.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbn-raju/AdWall-Epam.git"
+  },
+  "keywords": [],
+  "author": "SBN RAJU",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sbn-raju/AdWall-Epam/issues"
+  },
+  "homepage": "https://github.com/sbn-raju/AdWall-Epam#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "ejs-mate": "^4.0.0",
+    "express": "^4.21.2"
+  }
+}
