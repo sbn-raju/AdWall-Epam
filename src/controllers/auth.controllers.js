@@ -92,6 +92,8 @@ const backendAuthRegisterControllers = async (req, res) => {
   //Get the information by the body.
   const { name, email, password, role } = req.body;
 
+  console.log(name, email, password, role);
+
   //validation check
   if (!name || !email || !password || !role) {
     return res.status(400).json({
