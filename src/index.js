@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require('cors');
 const backendAuthRoute = require("./routes/auth.routes");
+const imageKitRoute = require("./routes/imageKit.routes");
+const razorpayRoute = require("./routes/razorpay.routes");
 
 
 
@@ -30,6 +32,16 @@ app.use(cookieParser());
 const PORT = process.env.PORT || 5000;
 
 
+//Allowing cross origin request
+// allow cross-origin requests
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", 
+      "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+
 //This Route is for the authentication Pages and backend routes
 //***********************AUTH BACKEND ROUTES************************** */
 app.use("/api/v1.Adwall/auth", backendAuthRoute);
@@ -43,9 +55,11 @@ app.use("/api/v1.Adwall/auth", backendAuthRoute);
 //***********************BUYER BACKEND DASHBOARD ROUTES************************* */
 
 
-//This is Route will show all the public routes
-//***************************HOME PAGE ROUTES********************************** */
+app.use("/api/v1.AdWall/third-party", imageKitRoute);
 
+app.use("/api/v1.AdWall/payment", razorpayRoute);
+
+//Webhooks for verification of payment.
 
 
 //Port is listening at PORT.
