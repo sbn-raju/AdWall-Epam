@@ -56,7 +56,7 @@ const backendAuthLoginControllers = async (req, res) => {
         return res.status(200).cookie('ad_wall', token, {
             httpOnly: true, 
             secure: false,
-            sameSite: 'lax', 
+            sameSite: 'Lax', 
             maxAge: 24 * 60 * 60 * 1000   
         }).json({
             success: true,

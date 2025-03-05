@@ -8,7 +8,11 @@ const { options } = require("../routes/auth.routes.js");
 const createNewOrderController = async(req, res)=>{
 
     //Getting the details from the request.
-    const {name, email, amount, phone } = req.body;
+    const {name, email, amount, address, phone, product_id} = req.body;
+
+    //Getting the order id and tht user id from the authorization middleware.
+    // const { user_id } = req.user;
+    const user_id = "c9799a74-93ad-4ded-a9b8-f0a29708d5b2";
     
     //Validation check if the values are not null.
     if(!name || !email || !amount || !phone){
@@ -30,21 +34,42 @@ const createNewOrderController = async(req, res)=>{
         }
     }
 
-    //Creating the order id using the razorpay instance which we have created in the RazorPay file.
+    try {
+            //Creating the order id using the razorpay instance which we have created in the RazorPay file.
     const order = await razorpay.orders.create(newOrder);
 
     console.log(order);
 
     //Return the response on the basis of the status of the order.
     if(order.status == 'created'){
-        return res.status(201).json({
-            success: true,
-            data: order
-        })
+
+        //Adding the order details into the database.
+        const {data:orderDetails, error:orderError} = await supabase.from("orders").insert([{
+           created_by: user_id,
+           product_id: product_id,
+           razorpay_order_id: order?.id,
+           address: address,
+           payment_status: "pending"
+        }]).select();
+
+        if(orderError){
+            throw new Error("Error in Creating Order");
+        }
+
+        if(orderDetails?.length != 0){
+            return res.status(201).json({
+                success: true,
+                data: order
+            })
+        }
     }else{
-        return res.status(500).json({
+       throw new Error("Error in Creating Order");
+    }
+    } catch (error) {
+        console.log(error);
+    return res.status(500).json({
         success: false,
-        message: `Internal Server Error creating new order`
+        message: `Internal Server Error: ${error.message || error}`
     })
     }
 }
@@ -52,11 +77,16 @@ const createNewOrderController = async(req, res)=>{
 
 
 const placeNewOrderController = async(req, res)=>{
-
-    console.log("Hello");
+    
+    console.log(req);
+    return res.status(201).json({
+        success: true,
+        message: "Order is placed Successfully"
+    })
 }
 
 
 module.exports = {
-    createNewOrderController
+    createNewOrderController,
+    placeNewOrderController
 }

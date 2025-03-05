@@ -1,0 +1,1 @@
+const supabase = require("../database/db.connect.js");
