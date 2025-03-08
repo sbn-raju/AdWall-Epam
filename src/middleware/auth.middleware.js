@@ -5,7 +5,6 @@ const authMiddleware = async(req, res, next)=>{
     //Getting tokens from the cookies.
     const token = req?.cookies?.ad_wall;
 
-
     //Return if token is not present.
     if(!token){
         return res.status(401).json({

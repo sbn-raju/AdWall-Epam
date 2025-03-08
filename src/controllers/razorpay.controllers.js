@@ -12,10 +12,10 @@ const createNewOrderController = async(req, res)=>{
 
     //Getting the order id and tht user id from the authorization middleware.
     // const { user_id } = req.user;
-    const user_id = "c9799a74-93ad-4ded-a9b8-f0a29708d5b2";
+    const user_id = req?.user?.id;
     
     //Validation check if the values are not null.
-    if(!name || !email || !amount || !phone){
+    if(!name || !email || !amount || !phone || !product_id){
         return res.status(400).json({
             success: false,
             message: "Invalid Fields"
@@ -30,7 +30,8 @@ const createNewOrderController = async(req, res)=>{
         notes:{
             name: name,
             email: email,
-            phone: phone
+            phone: phone,
+            product_id: product_id
         }
     }
 
@@ -51,6 +52,7 @@ const createNewOrderController = async(req, res)=>{
            address: address,
            payment_status: "pending"
         }]).select();
+
 
         if(orderError){
             throw new Error("Error in Creating Order");

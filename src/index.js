@@ -5,6 +5,8 @@ const cors = require('cors');
 const backendAuthRoute = require("./routes/auth.routes");
 const razorpayRoute = require("./routes/razorpay.routes");
 const productRoute = require("./routes/product.routes");
+const orderRoute = require("./routes/order.routes");
+const webhookRoute = require("./routes/webhook.routes");
 
 
 
@@ -16,8 +18,9 @@ const app = express();
 
 //Applying the cors
 app.use(cors({
-  origin: ["http://localhost:5173", "https://cc01-103-255-144-74.ngrok-free.app"], 
-  credentials: true
+  origin: "http://localhost:5173", 
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 
 
@@ -40,14 +43,20 @@ const PORT = process.env.PORT || 5000;
 //***********************AUTH BACKEND ROUTES************************** */
 app.use("/api/v1.Adwall/auth", backendAuthRoute);
 
+app.get("/home",(req, res)=>{
+    res.send("Hello");
+})
+
 
 //This Route will show the seller dashboards.
 //***********************SELLER BACKEND DASHBOARD ROUTES************************* */
 app.use("/api/v1.Adwall/product", productRoute)
 
+
+
 //This Route will show the seller dashboards.
 //***********************BUYER BACKEND DASHBOARD ROUTES************************* */
-
+app.use("/api/v1.Adwall/order", orderRoute);
 
 
 
@@ -55,6 +64,7 @@ app.use("/api/v1.Adwall/product", productRoute)
 app.use("/api/v1.AdWall/payment", razorpayRoute);
 
 //Webhooks for verification of payment.
+app.use("/api/v1.AdWall/webhook", webhookRoute);
 
 
 //Port is listening at PORT.

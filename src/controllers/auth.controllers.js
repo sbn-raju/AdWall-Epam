@@ -23,7 +23,7 @@ const backendAuthLoginControllers = async (req, res) => {
 
     //If get the error is getting the existing user throw error
     if(existingUserError){
-        throw new Error(existingUserError);
+        throw new Error(existingUserError.message);
     }
 
     //This IF Block will run is the user is not present.
@@ -49,14 +49,14 @@ const backendAuthLoginControllers = async (req, res) => {
 
         //Signing the JWT token with secret and user Data
         const token = jwt.sign(userData, process.env.JWT_TOKEN_KEY, {
-            expiresIn: '3h',
+            expiresIn: '1d',
         });
 
         //Sending the response back to the client. and saving the token in the cookie.
         return res.status(200).cookie('ad_wall', token, {
             httpOnly: true, 
-            secure: false,
-            sameSite: 'Lax', 
+            secure: true,
+            sameSite: 'None', 
             maxAge: 24 * 60 * 60 * 1000   
         }).json({
             success: true,
