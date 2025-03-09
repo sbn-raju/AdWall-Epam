@@ -17,8 +17,8 @@ dotenv.config();
 const app = express();
 
 //Applying the cors
-app.use('*', cors({
-  origin: ["http://localhost:5173", "https://098d-2401-4900-889d-e668-50b9-5135-c46-b4b3.ngrok-free.app"], 
+app.use(cors({
+  origin: ["http://localhost:5173", " https://6d44-2401-4900-1cb4-8242-90e9-55e5-6828-2081.ngrok-free.app"], 
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
 }));
