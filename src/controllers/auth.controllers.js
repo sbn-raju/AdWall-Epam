@@ -57,7 +57,7 @@ const backendAuthLoginControllers = async (req, res) => {
             httpOnly: true, 
             secure: true,
             sameSite: 'None', 
-            maxAge: 24 * 60 * 60 * 1000   
+            maxAge: 24 * 60 * 60 * 1000,   
         }).json({
             success: true,
             message: "Login successful",

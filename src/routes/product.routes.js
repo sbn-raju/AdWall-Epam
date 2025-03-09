@@ -1,5 +1,5 @@
 const express = require("express");
-const { productListingController, getProductsController, singleProductController, sellerAdsListControllers, wallOnRentControllers, singleProductOnRentController } = require("../controllers/product.controllers");
+const { productListingController, getProductsController, singleProductController, sellerAdsListControllers, wallOnRentControllers, singleProductOnRentController, wallOnRentBuyerControllers } = require("../controllers/product.controllers");
 const upload = require("../helpers/multer");
 const authMiddleware = require("../middleware/auth.middleware");
 const authorization = require("../middleware/autho.middleware");
@@ -14,6 +14,9 @@ productRoute.route("/seller/walls").get(authMiddleware, sellerAdsListControllers
 productRoute.route("/seller/rented").get(authMiddleware, wallOnRentControllers);
 
 productRoute.route("/rent-single").get(authMiddleware, singleProductOnRentController);
+
+//Buyer Routes
+productRoute.route("/buyer/rented").get(authMiddleware, wallOnRentBuyerControllers);
 
 //Public Route.
 productRoute.route("/list").get(getProductsController);

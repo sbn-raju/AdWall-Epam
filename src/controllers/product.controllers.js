@@ -342,6 +342,67 @@ const singleProductOnRentController = async(req, res)=>{
 }
 
 
+//This controller will get the product which are on rent.
+const wallOnRentBuyerControllers = async(req, res)=>{
+
+  //Getting limit and page from the query;
+  const page = parseInt(req?.query?.page, 10) || 1;
+  const limit = parseInt(req?.query?.limit, 10) || 10;
+
+  //Calculate the offset also;
+  const offset = (page - 1) * 10;
+  
+  //Get the user Id from the middleware.
+  const user_id = req?.user?.id;
+
+  //Validation check
+  if(!user_id){
+    return res.status(500).json({
+      success: false,
+      message: "Page, Limit or the User_id is missing"
+    })
+  }
+
+  try {
+    const {count, error:countError} = await supabase.from('orders').select('*, walls(*)', {count: 'exact', head: true}).eq('created_by', user_id).eq('payment_status', 'captured');
+
+    if(countError){
+      console.log(countError);
+      throw new Error(countError.message);
+    }
+
+    //Getting the details of the walls which are on rent.
+    const {data: productData, error: productError} = await supabase.from('orders').select('* , walls(*)').eq('created_by', user_id).eq('payment_status', 'captured').range(offset, offset + limit - 1);
+    console.log(productData, productError);
+
+    if(productError){
+      throw new Error(productError.message);
+    }
+
+    console.log(productData);
+
+    if(productData?.length != 0){
+      return res.status(200).json({
+        success: true,
+        data: productData,
+        totalCount: count
+      })
+    }else{
+      return res.status(400).json({
+        success: false,
+        message: "No Data Found"
+      })
+    }
+  } catch (error) {
+    console.log(error);
+        return res.status(500).json({
+        success: false,
+        message: `Internal Server Error: ${error.message || error}`
+    })
+  }
+}
+
+
 
 
 module.exports = {
@@ -350,5 +411,6 @@ module.exports = {
     singleProductController,
     sellerAdsListControllers,
     wallOnRentControllers,
-    singleProductOnRentController
+    singleProductOnRentController,
+    wallOnRentBuyerControllers
 }
