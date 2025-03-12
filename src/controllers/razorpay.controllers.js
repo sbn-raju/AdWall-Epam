@@ -42,7 +42,7 @@ const createNewOrderController = async(req, res)=>{
     console.log(order);
 
     //Return the response on the basis of the status of the order.
-    if(order.status == 'created'){
+    if(order?.status == 'created'){
 
         //Adding the order details into the database.
         const {data:orderDetails, error:orderError} = await supabase.from("orders").insert([{
