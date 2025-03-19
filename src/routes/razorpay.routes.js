@@ -8,7 +8,7 @@ const razorpayRoute = express();
 razorpayRoute.route("/create-order").post(authMiddleware, createNewOrderController);
 
 //This Route is for adding payment details from the user.
-razorpayRoute.route("/place-order").post(placeNewOrderController);
+razorpayRoute.route("/place-order").post(authMiddleware, placeNewOrderController);
 
 
 
