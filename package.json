@@ -9,6 +9,9 @@
     "build": "babel src --out-dir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "babel": {
+    "presets": ["@babel/preset-env"]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sbn-raju/AdWall-Epam.git"
