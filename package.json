@@ -10,7 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "babel": {
-    "presets": ["@babel/preset-env"]
+    "presents": [
+      "@babel/preset-env"
+    ]
   },
   "repository": {
     "type": "git",
@@ -25,9 +27,6 @@
   },
   "homepage": "https://github.com/sbn-raju/AdWall-Epam#readme",
   "dependencies": {
-    "@babel/cli": "^7.28.0",
-    "@babel/core": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
     "@supabase/supabase-js": "^2.49.1",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.5.1",
@@ -38,5 +37,10 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "razorpay": "^2.9.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0"
   }
 }
